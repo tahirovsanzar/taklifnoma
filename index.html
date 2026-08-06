@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To'y Taklifnomasi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,32 +12,61 @@
             box-sizing: border-box;
         }
 
-        body {
-            background-color: #f7f5f0;
+        html, body {
+            height: 100%;
             font-family: 'Montserrat', sans-serif;
             color: #4a4a4a;
+            overflow-x: hidden;
+        }
+
+        /* Orqa fon rasmi fixed holatda saqlanadi */
+        .bg-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: "C:\Users\Admin\OneDrive\Desktop\taklifnoma\rasm1.jpg"('rasm1.png'); /* Bu yerga fon rasmingiz fayl nomini yozing */
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        /* Sahifalar konteyneri */
+        .sections-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        /* Har bir alohida sahifa (Page) */
+        .page {
+            height: 100vh;
+            scroll-snap-align: start;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             padding: 20px;
+            position: relative;
         }
 
-        .invitation-card {
-            background: #ffffff;
+        /* Kartochka dizayni */
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(5px);
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             border: 1px solid #e8e2d5;
             padding: 40px 25px;
             text-align: center;
             position: relative;
-            overflow: hidden;
+            animation: fadeIn 0.8s ease-in-out;
         }
 
-        /* Naqshli hoshiya simulatsiyasi */
-        .invitation-card::before {
+        .card::before {
             content: "";
             position: absolute;
             top: 10px;
@@ -50,50 +79,49 @@
             opacity: 0.5;
         }
 
+        /* Matnlar stili */
         .bismillah {
             font-family: 'Playfair Display', serif;
-            font-size: 22px;
+            font-size: 26px;
             color: #8c733e;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .quran-verse {
             font-style: italic;
-            font-size: 14px;
+            font-size: 16px;
             color: #6b6b6b;
-            margin-bottom: 25px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .verse-number {
             font-weight: 600;
             display: block;
-            margin-top: 5px;
+            margin-top: 10px;
             color: #8c733e;
+            font-size: 18px;
         }
 
         .main-text {
             font-size: 15px;
-            line-height: 1.8;
-            margin-bottom: 30px;
+            line-height: 1.9;
             color: #333333;
         }
 
         .highlight {
             font-family: 'Playfair Display', serif;
-            font-size: 20px;
+            font-size: 22px;
             color: #8c733e;
             display: block;
-            margin: 10px 0;
+            margin: 12px 0;
             font-weight: 600;
         }
 
         .details-box {
-            background: #faf8f5;
+            background: rgba(250, 248, 245, 0.9);
             border: 1px dashed #d4af37;
             border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
+            padding: 20px 15px;
         }
 
         .detail-item {
@@ -113,19 +141,19 @@
         }
 
         .detail-value {
-            font-size: 16px;
+            font-size: 17px;
             font-weight: 600;
             color: #2c2c2c;
         }
 
         .respect-text {
-            font-size: 13px;
+            font-size: 14px;
             color: #777;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .hosts {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 600;
             color: #2c2c2c;
             line-height: 1.6;
@@ -147,47 +175,95 @@
         .btn-location:hover {
             background-color: #705b30;
         }
+
+        /* Keyingi sahifaga o'tish ko'rsatkichi (Strelka) */
+        .next-arrow {
+            position: absolute;
+            bottom: 15px;
+            font-size: 20px;
+            color: #8c733e;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
     </style>
 </head>
 <body>
 
-    <div class="invitation-card">
-        <div class="bismillah">بسم الله الرحمن الرحيم</div>
+    <!-- Rasm har doim orqa fonda turadi -->
+    <div class="bg-fixed"></div>
 
-        <div class="quran-verse">
-            "Biz ularni juft qilib yaratdik"
-            <span class="verse-number">“78:8”</span>
-        </div>
-
-        <div class="main-text">
-            Hurmatli aziz mehmonsiz!<br>
-            Sizlarni hayotimizning eng go'zal va baxtli onlarida biz bilan bo'lishingiz istagida 
-            <span class="highlight">“Islomiy” nikoh to'y</span>
-            munosabati bilan yoziladigan dasturxonimizga lutfan taklif qilamiz.
-        </div>
-
-        <div class="details-box">
-            <div class="detail-item">
-                <div class="detail-title">📅 SANA</div>
-                <div class="detail-value">09.08.2026</div>
+    <div class="sections-container">
+        
+        <!-- 1-SAHIFA: Bismillah & Oyat -->
+        <section class="page" id="page1">
+            <div class="card">
+                <div class="bismillah">بسم الله الرحمن الرحيم</div>
+                <div class="quran-verse">
+                    "Биз уларни жуфт қилиб яратдик"
+                    <span class="verse-number">“78:8”</span>
+                </div>
             </div>
-            <div class="detail-item">
-                <div class="detail-title">⏰ SOAT</div>
-                <div class="detail-value">11:00</div>
-            </div>
-            <div class="detail-item">
-                <div class="detail-title">📍 MANZIL</div>
-                <div class="detail-value">Qoraqamich mavzesi<br>«Quyosh» to'yxonasi</div>
-            </div>
-        </div>
+            <a href="#page2" class="next-arrow">▼</a>
+        </section>
 
-        <div class="respect-text">Hurmat va ehtirom ila:</div>
-        <div class="hosts">
-            Tojitoy o'g'li Ravshonbek<br>
-            Alimjonovlar oilasi
-        </div>
+        <!-- 2-SAHIFA: Taklif matni -->
+        <section class="page" id="page2">
+            <div class="card">
+                <div class="main-text">
+                    Hurmatli aziz mehmonimiz!<br>
+                    Сизларни ҳаётимизнинг энг гўзал ва бахтли онларида биз билан бўлишингиз истагида
+                    <span class="highlight">"Исломий"</span>
+                    никох тўй муносабати билан ёзиладиган дастурхонимизга лутфан таклиф қиламиз.
+                </div>
+            </div>
+            <a href="#page3" class="next-arrow">▼</a>
+        </section>
 
-        <a href="https://maps.google.com" target="_blank" class="btn-location">📍 Xaritadan ko'rish</a>
+        <!-- 3-SAHIFA: Sana, Vaqt va Manzil -->
+        <section class="page" id="page3">
+            <div class="card">
+                <div class="details-box">
+                    <div class="detail-item">
+                        <div class="detail-title">📅 САНА</div>
+                        <div class="detail-value">09.08.2026</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-title">⏰ СОАТ</div>
+                        <div class="detail-value">11:00</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-title">📍 МАНЗИЛ:</div>
+                        <div class="detail-value">Қорабулоқ қишлоғи "Қуаныш" тўйхонаси </div>
+                    </div>
+                </div>
+                <a href="https://maps.google.com" target="_blank" class="btn-location">📍 Xaritadan ko'rish</a>
+            </div>
+            <a href="#page4" class="next-arrow">▼</a>
+        </section>
+
+        <!-- 4-SAHIFA: Таклиф этувчилар -->
+        <section class="page" id="page4">
+            <div class="card">
+                <div class="respect-text">Хурмат ва эхтиром ила:</div>
+                <div class="hosts">
+                    Тожитой ўғли Равшанбек<br>
+                    Алимжоновлар оиласи
+                </div>
+            </div>
+        </section>
+
     </div>
 
 </body>
