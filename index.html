@@ -19,16 +19,17 @@
             overflow-x: hidden;
         }
 
-        /* Orqa fon rasmi fixed holatda saqlanadi */
+        /* Fon rasmi butun ekranni chegarasiz egallaydi */
         .bg-fixed {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-image: url('rasm1.jpg'); /* Bu yerga fon rasmingiz fayl nomini yozing */
-            background-size: cover;
+            background-image: url('rasm1.jpg'); /* Fon rasmi fayl nomi */
+            background-size: 100% 100%; /* Ekran o'lchamiga moslab 100% cho'zadi */
             background-position: center;
+            background-repeat: no-repeat;
             z-index: -1;
         }
 
@@ -40,7 +41,7 @@
             scroll-behavior: smooth;
         }
 
-        /* Har bir alohida sahifa (Page) */
+        /* Har bir sahifa */
         .page {
             height: 100vh;
             scroll-snap-align: start;
@@ -51,46 +52,31 @@
             position: relative;
         }
 
-        /* Kartochka dizayni */
-        .card {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(5px);
+        /* Chegarasiz matn bloki */
+        .content-box {
             width: 100%;
-            max-width: 440px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid #e8e2d5;
-            padding: 40px 25px;
+            max-width: 400px;
             text-align: center;
-            position: relative;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.4); /* Rasmni to'liq yopmasligi uchun juda yengil shaffoflik */
+            backdrop-filter: blur(2px);
+            border-radius: 20px;
             animation: fadeIn 0.8s ease-in-out;
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 1px solid #d4af37;
-            border-radius: 12px;
-            pointer-events: none;
-            opacity: 0.5;
         }
 
         /* Matnlar stili */
         .bismillah {
             font-family: 'Playfair Display', serif;
-            font-size: 26px;
+            font-size: 28px;
             color: #8c733e;
             margin-bottom: 20px;
+            font-weight: bold;
         }
 
         .quran-verse {
             font-style: italic;
-            font-size: 16px;
-            color: #6b6b6b;
+            font-size: 17px;
+            color: #4a4a4a;
             line-height: 1.6;
         }
 
@@ -103,14 +89,15 @@
         }
 
         .main-text {
-            font-size: 15px;
+            font-size: 16px;
             line-height: 1.9;
-            color: #333333;
+            color: #2c2c2c;
+            font-weight: 500;
         }
 
         .highlight {
             font-family: 'Playfair Display', serif;
-            font-size: 22px;
+            font-size: 24px;
             color: #8c733e;
             display: block;
             margin: 12px 0;
@@ -118,14 +105,11 @@
         }
 
         .details-box {
-            background: rgba(250, 248, 245, 0.9);
-            border: 1px dashed #d4af37;
-            border-radius: 10px;
-            padding: 20px 15px;
+            padding: 10px;
         }
 
         .detail-item {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .detail-item:last-child {
@@ -133,42 +117,44 @@
         }
 
         .detail-title {
-            font-size: 12px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #8c733e;
             margin-bottom: 4px;
+            font-weight: 600;
         }
 
         .detail-value {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 600;
-            color: #2c2c2c;
+            color: #1a1a1a;
         }
 
         .respect-text {
-            font-size: 14px;
-            color: #777;
+            font-size: 15px;
+            color: #555;
             margin-bottom: 12px;
         }
 
         .hosts {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
-            color: #2c2c2c;
+            color: #1a1a1a;
             line-height: 1.6;
         }
 
         .btn-location {
             display: inline-block;
             margin-top: 25px;
-            padding: 12px 25px;
+            padding: 12px 28px;
             background-color: #8c733e;
             color: #ffffff;
             text-decoration: none;
             border-radius: 25px;
             font-size: 14px;
             font-weight: 600;
+            box-shadow: 0 4px 12px rgba(140, 115, 62, 0.3);
             transition: background 0.3s ease;
         }
 
@@ -176,11 +162,11 @@
             background-color: #705b30;
         }
 
-        /* Keyingi sahifaga o'tish ko'rsatkichi (Strelka) */
+        /* Pastga o'tish strelkasi */
         .next-arrow {
             position: absolute;
-            bottom: 15px;
-            font-size: 20px;
+            bottom: 20px;
+            font-size: 22px;
             color: #8c733e;
             animation: bounce 2s infinite;
             cursor: pointer;
@@ -194,21 +180,21 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Rasm har doim orqa fonda turadi -->
+    <!-- Chegarasiz 100% Fon rasmi -->
     <div class="bg-fixed"></div>
 
     <div class="sections-container">
         
         <!-- 1-SAHIFA: Bismillah & Oyat -->
         <section class="page" id="page1">
-            <div class="card">
+            <div class="content-box">
                 <div class="bismillah">بسم الله الرحمن الرحيم</div>
                 <div class="quran-verse">
                     "Биз уларни жуфт қилиб яратдик"
@@ -220,9 +206,9 @@
 
         <!-- 2-SAHIFA: Taklif matni -->
         <section class="page" id="page2">
-            <div class="card">
+            <div class="content-box">
                 <div class="main-text">
-                    Hurmatli aziz mehmonimiz!<br>
+                    Хурматли азиз мехмонимиз!<br>
                     Сизларни ҳаётимизнинг энг гўзал ва бахтли онларида биз билан бўлишингиз истагида
                     <span class="highlight">"Исломий"</span>
                     никох тўй муносабати билан ёзиладиган дастурхонимизга лутфан таклиф қиламиз.
@@ -233,9 +219,9 @@
 
         <!-- 3-SAHIFA: Sana, Vaqt va Manzil -->
         <section class="page" id="page3">
-            <div class="card">
+            <div class="content-box">
                 <div class="details-box">
-                    <div class="detail-item">
+                   <div class="detail-item">
                         <div class="detail-title">📅 САНА</div>
                         <div class="detail-value">09.08.2026</div>
                     </div>
@@ -253,10 +239,10 @@
             <a href="#page4" class="next-arrow">▼</a>
         </section>
 
-        <!-- 4-SAHIFA: Таклиф этувчилар -->
+        <!-- 4-SAHIFA: Taklif etuvchilar -->
         <section class="page" id="page4">
-            <div class="card">
-                <div class="respect-text">Хурмат ва эхтиром ила:</div>
+            <div class="content-box">
+               <div class="respect-text">Хурмат ва эхтиром ила:</div>
                 <div class="hosts">
                     Тожитой ўғли Равшанбек<br>
                     Алимжоновлар оиласи
