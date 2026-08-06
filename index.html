@@ -26,7 +26,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-image: url('rasm1.jpg'); /* Fon rasmi fayl nomi */
+            background-image: url('rasm1.jpg');
             background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
@@ -176,13 +176,14 @@
             font-weight: 600;
             box-shadow: 0 4px 12px rgba(140, 115, 62, 0.3);
             transition: background 0.3s ease;
+            cursor: pointer;
+            border: none;
         }
 
         .btn-location:hover {
             background-color: #705b30;
         }
 
-        /* Pastga o'tish strelkasi */
         .next-arrow {
             position: absolute;
             bottom: 20px;
@@ -207,22 +208,27 @@
 </head>
 <body>
 
-    <!-- Chegarasiz 100% Fon rasmi -->
+    <!-- Fon rasmi -->
     <div class="bg-fixed"></div>
 
     <!-- Maher Zain - Baraka Allahu Lakuma Audio -->
     <audio id="bg-music" loop preload="auto">
-        <source src="music1.mp3" type="audio/mpeg">
+        <source src="music.mp3" type="audio/mpeg">
     </audio>
 
     <div class="sections-container" id="container">
         
-        <!-- 1-SAHIFA: MUQOVA -->
+        <!-- 1-SAHIFA: MUQOVA VA OCHISH TUGMASI -->
         <section class="page" id="page1">
             <div class="content-box">
                 <div class="bismillah">بسم الله الرحمن الرحيم</div>
                 <div class="cover-title">Таклифнома</div>
                 <div class="monogram">M & D</div>
+                
+                <!-- Musiqani yoqib, keyingi sahifaga o'tkazuvchi tugma -->
+                <button class="btn-location" onclick="playAudioAndOpen()">
+                    🎵 Таклифномани очиш
+                </button>
             </div>
             <a href="#page2" class="next-arrow">▼</a>
         </section>
@@ -236,7 +242,7 @@
                 </div>
                 <div class="main-text">
                     Хурматли азиз мехмонимиз!<br>
-                    Сизларни ҳаётимизнинг энг гўзал ва бахтли онларида биз билан бўлишингиз истагида
+                    Сизларни ҳаётимизнинг энг гўзал va бахтли онларида биз билан бўлишингиз истагида
                     <span class="highlight">"Исломий"</span>
                     никох тўй муносабати билан ёзиладиган дастурхонимизга лутфан таклиф қиламиз.
                 </div>
@@ -279,26 +285,21 @@
 
     </div>
 
-    <!-- Avtomatik va yarim ortasidan musiqani ishga tushirish skripti -->
+    <!-- Musiqani boshqarish skripti -->
     <script>
         const audio = document.getElementById('bg-music');
 
-        function playAudio() {
-            // Musiqa audio faylining yarmi / naqoratidan boshlanadi (60 soniya = 1 daqiqa)
+        function playAudioAndOpen() {
+            // Musiqa 60-soniyadan (o'rtasidan / naqoratidan) boshlanadi
             audio.currentTime = 60; 
-
+            
             audio.play().then(() => {
-                document.removeEventListener('click', playAudio);
-                document.removeEventListener('touchstart', playAudio);
-                document.getElementById('container').removeEventListener('scroll', playAudio);
+                // Musiqa yoqilgach, silliq ravishda 2-sahifaga o'tadi
+                document.getElementById('page2').scrollIntoView({ behavior: 'smooth' });
             }).catch(error => {
-                // Autoplay brauzer tomonidan ushlab qolinsa, keyingi harakatda yoqiladi
+                console.log("Musiqani chalishda xatolik:", error);
             });
         }
-
-        document.addEventListener('click', playAudio);
-        document.addEventListener('touchstart', playAudio);
-        document.getElementById('container').addEventListener('scroll', playAudio, { once: true });
     </script>
 </body>
 </html>
