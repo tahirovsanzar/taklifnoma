@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To'y Taklifnomasi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f7f5f0;
+            font-family: 'Montserrat', sans-serif;
+            color: #4a4a4a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .invitation-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 1px solid #e8e2d5;
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Naqshli hoshiya simulatsiyasi */
+        .invitation-card::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid #d4af37;
+            border-radius: 12px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .bismillah {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #8c733e;
+            margin-bottom: 15px;
+        }
+
+        .quran-verse {
+            font-style: italic;
+            font-size: 14px;
+            color: #6b6b6b;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .verse-number {
+            font-weight: 600;
+            display: block;
+            margin-top: 5px;
+            color: #8c733e;
+        }
+
+        .main-text {
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            color: #333333;
+        }
+
+        .highlight {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #8c733e;
+            display: block;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .details-box {
+            background: #faf8f5;
+            border: 1px dashed #d4af37;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+        }
+
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8c733e;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c2c2c;
+        }
+
+        .respect-text {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .hosts {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c2c2c;
+            line-height: 1.6;
+        }
+
+        .btn-location {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background-color: #8c733e;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .btn-location:hover {
+            background-color: #705b30;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="invitation-card">
+        <div class="bismillah">بسم الله الرحمن الرحيم</div>
+
+        <div class="quran-verse">
+            "Biz ularni juft qilib yaratdik"
+            <span class="verse-number">“78:8”</span>
+        </div>
+
+        <div class="main-text">
+            Hurmatli aziz mehmonsiz!<br>
+            Sizlarni hayotimizning eng go'zal va baxtli onlarida biz bilan bo'lishingiz istagida 
+            <span class="highlight">“Islomiy” nikoh to'y</span>
+            munosabati bilan yoziladigan dasturxonimizga lutfan taklif qilamiz.
+        </div>
+
+        <div class="details-box">
+            <div class="detail-item">
+                <div class="detail-title">📅 SANA</div>
+                <div class="detail-value">09.08.2026</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">⏰ SOAT</div>
+                <div class="detail-value">11:00</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-title">📍 MANZIL</div>
+                <div class="detail-value">Qoraqamich mavzesi<br>«Quyosh» to'yxonasi</div>
+            </div>
+        </div>
+
+        <div class="respect-text">Hurmat va ehtirom ila:</div>
+        <div class="hosts">
+            Tojitoy o'g'li Ravshonbek<br>
+            Alimjonovlar oilasi
+        </div>
+
+        <a href="https://maps.google.com" target="_blank" class="btn-location">📍 Xaritadan ko'rish</a>
+    </div>
+
+</body>
+</html>
