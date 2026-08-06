@@ -19,7 +19,7 @@
             overflow-x: hidden;
         }
 
-        /* Fon rasmi butun ekranni chegarasiz egallaydi */
+        /* Chegarasiz 100% Fon rasmi */
         .bg-fixed {
             position: fixed;
             top: 0;
@@ -27,7 +27,7 @@
             width: 100vw;
             height: 100vh;
             background-image: url('rasm1.jpg'); /* Fon rasmi fayl nomi */
-            background-size: 100% 100%; /* Ekran o'lchamiga moslab 100% cho'zadi */
+            background-size: 100% 100%;
             background-position: center;
             background-repeat: no-repeat;
             z-index: -1;
@@ -58,10 +58,30 @@
             max-width: 400px;
             text-align: center;
             padding: 30px 20px;
-            background: rgba(255, 255, 255, 0.4); /* Rasmni to'liq yopmasligi uchun juda yengil shaffoflik */
+            background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(2px);
             border-radius: 20px;
             animation: fadeIn 0.8s ease-in-out;
+        }
+
+        /* 1-sahifa (Muqova) stili */
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            color: #1a1a1a;
+            font-weight: bold;
+            margin: 15px 0 10px 0;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        .monogram {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #8c733e;
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin-top: 15px;
         }
 
         /* Matnlar stili */
@@ -69,7 +89,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 28px;
             color: #8c733e;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-weight: bold;
         }
 
@@ -190,23 +210,30 @@
     <!-- Chegarasiz 100% Fon rasmi -->
     <div class="bg-fixed"></div>
 
-    <div class="sections-container">
+    <!-- Maher Zain - Baraka Allahu Lakuma Audio -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="music1.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="sections-container" id="container">
         
-        <!-- 1-SAHIFA: Bismillah & Oyat -->
+        <!-- 1-SAHIFA: MUQOVA -->
         <section class="page" id="page1">
             <div class="content-box">
                 <div class="bismillah">بسم الله الرحمن الرحيم</div>
-                <div class="quran-verse">
-                    "Биз уларни жуфт қилиб яратдик"
-                    <span class="verse-number">“78:8”</span>
-                </div>
+                <div class="cover-title">Таклифнома</div>
+                <div class="monogram">M & D</div>
             </div>
             <a href="#page2" class="next-arrow">▼</a>
         </section>
 
-        <!-- 2-SAHIFA: Taklif matni -->
+        <!-- 2-SAHIFA: OYAT VA TAKLIF MATNI -->
         <section class="page" id="page2">
             <div class="content-box">
+                <div class="quran-verse" style="margin-bottom: 25px;">
+                    "Биз уларни жуфт қилиб яратдик"
+                    <span class="verse-number">“78:8”</span>
+                </div>
                 <div class="main-text">
                     Хурматли азиз мехмонимиз!<br>
                     Сизларни ҳаётимизнинг энг гўзал ва бахтли онларида биз билан бўлишингиз истагида
@@ -217,11 +244,11 @@
             <a href="#page3" class="next-arrow">▼</a>
         </section>
 
-        <!-- 3-SAHIFA: Sana, Vaqt va Manzil -->
+        <!-- 3-SAHIFA: SANA, VAQT VA MANZIL -->
         <section class="page" id="page3">
             <div class="content-box">
                 <div class="details-box">
-                   <div class="detail-item">
+                    <div class="detail-item">
                         <div class="detail-title">📅 САНА</div>
                         <div class="detail-value">09.08.2026</div>
                     </div>
@@ -231,7 +258,7 @@
                     </div>
                     <div class="detail-item">
                         <div class="detail-title">📍 МАНЗИЛ:</div>
-                        <div class="detail-value">Қорабулоқ қишлоғи "Қуаныш" тўйхонаси </div>
+                        <div class="detail-value">Қорабулоқ қишлоғи "Қуаныш" тўйхонаси</div>
                     </div>
                 </div>
                 <a href="https://2gis.kz/shymkent/geo/70000001105431558" target="_blank" class="btn-location">📍 Xaritadan ko'rish</a>
@@ -239,10 +266,10 @@
             <a href="#page4" class="next-arrow">▼</a>
         </section>
 
-        <!-- 4-SAHIFA: Taklif etuvchilar -->
+        <!-- 4-SAHIFA: TAKLIF ETUVCHILAR -->
         <section class="page" id="page4">
             <div class="content-box">
-               <div class="respect-text">Хурмат ва эхтиром ила:</div>
+                <div class="respect-text">Хурмат ва эхтиром ила:</div>
                 <div class="hosts">
                     Тожитой ўғли Равшанбек<br>
                     Алимжоновлар оиласи
@@ -252,5 +279,26 @@
 
     </div>
 
+    <!-- Avtomatik va yarim ortasidan musiqani ishga tushirish skripti -->
+    <script>
+        const audio = document.getElementById('bg-music');
+
+        function playAudio() {
+            // Musiqa audio faylining yarmi / naqoratidan boshlanadi (60 soniya = 1 daqiqa)
+            audio.currentTime = 60; 
+
+            audio.play().then(() => {
+                document.removeEventListener('click', playAudio);
+                document.removeEventListener('touchstart', playAudio);
+                document.getElementById('container').removeEventListener('scroll', playAudio);
+            }).catch(error => {
+                // Autoplay brauzer tomonidan ushlab qolinsa, keyingi harakatda yoqiladi
+            });
+        }
+
+        document.addEventListener('click', playAudio);
+        document.addEventListener('touchstart', playAudio);
+        document.getElementById('container').addEventListener('scroll', playAudio, { once: true });
+    </script>
 </body>
 </html>
